@@ -29,20 +29,15 @@ const game = function () {
         gridDiv.classList.add(`${i}${j}`);
         gridDiv.style.width = "3rem";
         gridDiv.style.height = "3rem";
+        gridDiv.style.border = "1px solid black";
+        gridDiv.addEventListener("click", playMove);
         gameGrid.appendChild(gridDiv);
       }    
     }
     symbol = 'X';
   }
-  const getArray = function () {
-
-  }
-  const updateBoard = function (move) {
-    // if legalMove update board and send positive notif 
-    // else negative notif  
-  }
-  const playNext = function () {
-    // check if next move to be played
+  const playMove = function () {
+  
   }
   return {initialize};
 }
