@@ -36,8 +36,8 @@ const game = function () {
     }
     symbol = 'X';
   }
-  const playMove = function () {
-  
+  const playMove = function (e) {
+    
   }
   return {initialize};
 }
