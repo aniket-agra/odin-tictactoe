@@ -1,0 +1,14 @@
+.gamePage {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  column-gap: 1vw;
+  justify-items: center;
+}
+
+.gameGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  border: 2px solid black;
+}
+
