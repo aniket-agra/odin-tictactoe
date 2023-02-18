@@ -24,6 +24,9 @@ const game = function () {
       boardArr[i][j] = 0;
     }    
   }
+  const initialize = function () {
+    alert("works!");
+  }
   const getArray = function () {
 
   }
@@ -34,6 +37,7 @@ const game = function () {
   const playNext = function () {
     // check if next move to be played
   }
+  return {initialize};
 }
 
 // create divs for board game, add listeners to each div
@@ -45,3 +49,6 @@ const game = function () {
 // clicks on a box, check if move is legal - if not prompt for re-play, if yes record in game board 
 // check if next move is to be played, if yes disable pl1 button else display notif
 // repeat for pl2 until either someone wins or gameboard is filled up 
+
+const startBtn = document.querySelector(".start");
+startBtn.addEventListener("click", game().initialize);
