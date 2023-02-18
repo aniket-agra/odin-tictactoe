@@ -17,15 +17,22 @@
 // - determine if next move needs to be played () 
 // - display notif if not
 const game = function () {
-  let boardArr = new Array(3);
-  for (let i = 0; i < 3; i++) {
-    boardArr[i] = new Array(3);
-    for (let j = 0; j < 3; j++) {
-      boardArr[i][j] = 0;
-    }    
-  }
+  let boardArr, symbol;
   const initialize = function () {
-    alert("works!");
+    let gameGrid = document.querySelector("div.gameGrid");
+    boardArr = new Array(3);
+    for (let i = 0; i < 3; i++) {
+      boardArr[i] = new Array(3);
+      for (let j = 0; j < 3; j++) {
+        boardArr[i][j] = 0;
+        let gridDiv = document.createElement("div");
+        gridDiv.classList.add(`${i}${j}`);
+        gridDiv.style.width = "3rem";
+        gridDiv.style.height = "3rem";
+        gameGrid.appendChild(gridDiv);
+      }    
+    }
+    symbol = 'X';
   }
   const getArray = function () {
 
