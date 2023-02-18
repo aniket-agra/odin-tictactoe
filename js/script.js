@@ -17,7 +17,7 @@
 // - determine if next move needs to be played () 
 // - display notif if not
 const game = function () {
-  let boardArr, symbol;
+  let boardArr, symbol, symbolDic;
   const initialize = function () {
     let gameGrid = document.querySelector("div.gameGrid");
     boardArr = new Array(3);
@@ -35,6 +35,7 @@ const game = function () {
       }    
     }
     symbol = 'X';
+    symbolDic = {'X': 'O', 'O': 'X'};
   }
   const playMove = function (e) {
     
