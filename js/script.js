@@ -54,7 +54,10 @@ const game = function () {
       let currPlayer = symbol === 'X' ? 1 : 2;
       let lastDiv = lastClicked.getAttribute("class");
       boardArr[Number(lastDiv[0])][Number(lastDiv[1])] = currPlayer;
-      checkBoardState();
+      if (hasWon(lastDiv)) {
+        alert(`Player ${currPlayer} wins!`);
+        // reset to starting position
+      }
       symbol = symbolDic[symbol];
       document.querySelectorAll(".confirm").forEach(e => {e.toggleAttribute("disabled")});
       lastClicked = null;
@@ -62,7 +65,7 @@ const game = function () {
     else
       alert("You MUST play a move!!");
   }
-  const checkBoardState = function () {
+  const hasWon = function (div) {
     
   }
   return {initialize};
