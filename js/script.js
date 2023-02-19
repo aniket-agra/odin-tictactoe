@@ -34,16 +34,20 @@ const game = function () {
         gameGrid.appendChild(gridDiv);
       }    
     }
+    document.querySelectorAll("button.confirm")
+            .forEach(e => e.addEventListener("click", confirmMove));
+    document.querySelector(".player2 .confirm").toggleAttribute("disabled");
     symbol = 'X';
     symbolDic = {'X': 'O', 'O': 'X'};
   }
   const playMove = function (e) {
-    if(e.target.textContent === "")
-    {
+    if(e.target.textContent === "") {
       e.target.textContent = symbol;
-      symbol = symbolDic[symbol];
     }
-      
+  }
+  const confirmMove = function (e) {
+    symbol = symbolDic[symbol];
+    document.querySelectorAll(".confirm").forEach(e => {e.toggleAttribute("disabled")});
   }
   return {initialize};
 }
