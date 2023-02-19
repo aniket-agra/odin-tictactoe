@@ -48,6 +48,8 @@ const game = function () {
       e.target.textContent = symbol;
       lastClicked = e.target;
     }
+    else 
+      alert("Sorry, that's not allowed!");
   }
   const confirmMove = function () {
     if (lastClicked !== null) {
