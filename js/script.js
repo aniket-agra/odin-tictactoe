@@ -50,7 +50,7 @@ const game = function () {
     }
   }
   const confirmMove = function (e) {
-    if (lastDiv !== null) {
+    if (lastClicked !== null) {
       let currPlayer = symbol === 'X' ? 1 : 2;
       let lastDiv = lastClicked.getAttribute("class");
       boardArr[Number(lastDiv[0])][Number(lastDiv[1])] = currPlayer;
