@@ -42,14 +42,16 @@ const game = function () {
     symbolDic = {'X': 'O', 'O': 'X'};
   }
   const playMove = function (e) {
-    if (lastClicked !== null) 
-      lastClicked.textContent = "";
-    if(e.target.textContent === "") {
-      e.target.textContent = symbol;
-      lastClicked = e.target;
-    }
-    else 
+    if (e.target.textContent !== "") 
       alert("Sorry, that's not allowed!");
+    else {
+      if (lastClicked !== null) 
+       lastClicked.textContent = "";
+      if(e.target.textContent === "") {
+        e.target.textContent = symbol;
+        lastClicked = e.target;
+      }
+    }
   }
   const confirmMove = function () {
     if (lastClicked !== null) {
