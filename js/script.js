@@ -50,9 +50,16 @@ const game = function () {
     }
   }
   const confirmMove = function (e) {
+    let currPlayer = symbol === 'X' ? 1 : 2;
+    let lastDiv = lastClicked.getAttribute("class");
+    boardArr[Number(lastDiv[0])][Number(lastDiv[1])] = currPlayer;
+    checkBoardState();
     symbol = symbolDic[symbol];
     document.querySelectorAll(".confirm").forEach(e => {e.toggleAttribute("disabled")});
     lastClicked = null;
+  }
+  const checkBoardState = function () {
+    
   }
   return {initialize};
 }
