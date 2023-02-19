@@ -17,7 +17,7 @@
 // - determine if next move needs to be played () 
 // - display notif if not
 const game = function () {
-  let boardArr, symbol, symbolDic;
+  let boardArr, symbol, symbolDic, lastClicked;
   const initialize = function () {
     let gameGrid = document.querySelector("div.gameGrid");
     boardArr = new Array(3);
@@ -37,17 +37,22 @@ const game = function () {
     document.querySelectorAll("button.confirm")
             .forEach(e => e.addEventListener("click", confirmMove));
     document.querySelector(".player2 .confirm").toggleAttribute("disabled");
+    lastClicked = null;
     symbol = 'X';
     symbolDic = {'X': 'O', 'O': 'X'};
   }
   const playMove = function (e) {
+    if (lastClicked !== null) 
+      lastClicked.textContent = "";
     if(e.target.textContent === "") {
       e.target.textContent = symbol;
+      lastClicked = e.target;
     }
   }
   const confirmMove = function (e) {
     symbol = symbolDic[symbol];
     document.querySelectorAll(".confirm").forEach(e => {e.toggleAttribute("disabled")});
+    lastClicked = null;
   }
   return {initialize};
 }
