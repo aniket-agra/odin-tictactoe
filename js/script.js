@@ -82,8 +82,8 @@ const game = function () {
       // check main diagonal for divs along the main diagonal
       if (row === col)
         chkDiag = chkMainDiag;
-      if (row === 1 && col === 1)
       // check along anti diagonal too if we're in the middle
+      if (row === 1 && col === 1)
         chkDiag = chkMainDiag || chkAntiDiag;
       // check anti diagonal for divs along the anti diagonal
       if (Math.abs(row - col) === 2)
