@@ -38,7 +38,12 @@ const game = function () {
     symbolDic = {'X': 'O', 'O': 'X'};
   }
   const playMove = function (e) {
-    
+    if(e.target.textContent === "")
+    {
+      e.target.textContent = symbol;
+      symbol = symbolDic[symbol];
+    }
+      
   }
   return {initialize};
 }
