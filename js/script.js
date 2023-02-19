@@ -20,6 +20,7 @@ const game = function () {
   let boardArr, symbol, symbolDic, lastClicked;
   const initialize = function () {
     let gameGrid = document.querySelector("div.gameGrid");
+    document.querySelectorAll("div.gameGrid > *").forEach(e => gameGrid.removeChild(e));
     boardArr = new Array(3);
     for (let i = 0; i < 3; i++) {
       boardArr[i] = new Array(3);
@@ -36,7 +37,8 @@ const game = function () {
     }
     document.querySelectorAll("button.confirm")
             .forEach(e => e.addEventListener("click", confirmMove));
-    document.querySelector(".player2 .confirm").toggleAttribute("disabled");
+    document.querySelector(".player1 .confirm").removeAttribute("disabled");
+    document.querySelector(".player2 .confirm").setAttribute("disabled", "");
     lastClicked = null;
     symbol = 'X';
     symbolDic = {'X': 'O', 'O': 'X'};
@@ -61,6 +63,8 @@ const game = function () {
       if (hasWon(lastDiv)) {
         alert(`Player ${currPlayer} wins!`);
         // reset to starting position
+        initialize();
+        return;
       }
       symbol = symbolDic[symbol];
       document.querySelectorAll(".confirm").forEach(e => {e.toggleAttribute("disabled")});
