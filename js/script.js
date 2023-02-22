@@ -28,6 +28,13 @@ const gameBoard = function () {
   }
   const getBoard = function () {
     // return a copy or display ??
+    let boardCopy = new Array(3);
+    for (let i = 0; i < 3; i++) {
+      boardCopy[i] = new Array(3);
+      for (let j = 0; j < 3; j++)
+        boardCopy[i][j] = boardArray[i][j];
+    }
+    return boardCopy;
   }
   return {initialize, updateBoard, getBoard};
 }
@@ -43,64 +50,8 @@ const gameBoard = function () {
 // - determine if next move needs to be played () 
 // - display notif if not
 const game = function () {
-  let boardArr, symbol, symbolDic, lastClicked;
-  const initialize = function () {
-    let gameGrid = document.querySelector("div.gameGrid");
-    document.querySelectorAll("div.gameGrid > *").forEach(e => gameGrid.removeChild(e));
-    boardArr = new Array(3);
-    for (let i = 0; i < 3; i++) {
-      boardArr[i] = new Array(3);
-      for (let j = 0; j < 3; j++) {
-        boardArr[i][j] = 0;
-        let gridDiv = document.createElement("div");
-        gridDiv.classList.add(`${i}${j}`);
-        gridDiv.style.width = "3rem";
-        gridDiv.style.height = "3rem";
-        gridDiv.style.border = "1px solid black";
-        gridDiv.addEventListener("click", playMove);
-        gameGrid.appendChild(gridDiv);
-      }    
-    }
-    document.querySelectorAll("button.confirm")
-            .forEach(e => e.addEventListener("click", confirmMove));
-    document.querySelector(".player1 .confirm").removeAttribute("disabled");
-    document.querySelector(".player2 .confirm").setAttribute("disabled", "");
-    lastClicked = null;
-    symbol = 'X';
-    symbolDic = {'X': 'O', 'O': 'X'};
-  }
-  const playMove = function (e) {
-    if (e.target.textContent !== "") 
-      alert("Sorry, that's not allowed!");
-    else {
-      if (lastClicked !== null) 
-       lastClicked.textContent = "";
-      if(e.target.textContent === "") {
-        e.target.textContent = symbol;
-        lastClicked = e.target;
-      }
-    }
-  }
-  const confirmMove = function () {
-    if (lastClicked !== null) {
-      let currPlayer = symbol === 'X' ? 1 : 2;
-      let lastDiv = lastClicked.getAttribute("class");
-      boardArr[Number(lastDiv[0])][Number(lastDiv[1])] = currPlayer;
-      if (hasWon(lastDiv)) {
-        alert(`Player ${currPlayer} wins!`);
-        // reset to starting position
-        initialize();
-        return;
-      }
-      symbol = symbolDic[symbol];
-      document.querySelectorAll(".confirm").forEach(e => {e.toggleAttribute("disabled")});
-      lastClicked = null;
-    }
-    else
-      alert("You MUST play a move!!");
-  }
-  const hasWon = function (div) {
-    let row = Number(div[0]), col = Number(div[1]), chkRow, chkCol, chkDiag = false;
+  const hasWon = function (row, col) {
+    let chkRow, chkCol, chkDiag = false;
     // check row and column for all divs
     chkRow = (boardArr[row][0] === boardArr[row][1]) && (boardArr[row][1] === boardArr[row][2]);
     chkCol = (boardArr[0][col] === boardArr[1][col]) && (boardArr[1][col] === boardArr[2][col]);
@@ -125,7 +76,9 @@ const game = function () {
     }
     return (chkRow || chkCol || chkDiag);
   }
-  return {initialize};
+  const playRound = function () {
+  }
+  return {playRound};
 }
 
 // create divs for board game, add listeners to each div
