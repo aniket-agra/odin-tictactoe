@@ -3,9 +3,9 @@
 // -  player symbol - setter/getter
 const player = function () {
   let name, symbol;
-  const setName = function (name) { name = name; }
+  const setName = function (nameInp) { name = nameInp; }
   const getName = function () {return name;}
-  const setSymbol = function (symbol) { symbol = symbol; }
+  const setSymbol = function (symbolInp) { symbol = symbolInp; }
   const getSymbol = function () {return symbol;}
   return {setName, getName, setSymbol, getSymbol};
 };
