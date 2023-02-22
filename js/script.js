@@ -1,10 +1,36 @@
 // player instance
 // -  player name - setter/getter
 // -  player symbol - setter/getter
+const player = function () {
+  let name, symbol;
+  const setName = function (name) { name = name; }
+  const getName = function () {return name;}
+  const setSymbol = function (symbol) { symbol = symbol; }
+  const getSymbol = function () {return symbol;}
+  return {setName, getName, setSymbol, getSymbol};
+};
+
 
 // - gameBoard instance
 // - game board array - setter/getter
-// - 
+const gameBoard = function () {
+  let boardArray;
+  const initialize = function () {
+    boardArray = new Array(3);
+    for (let i = 0; i < 3; i++) {
+      boardArray[i] = new Array(3);
+      for (let j = 0; j < 3; j++)
+        boardArray[i][j] = 0;
+    }
+  }
+  const updateBoard = function(row, col, value) {
+    boardArray[row][col] = value;
+  }
+  const getBoard = function () {
+    // return a copy or display ??
+  }
+  return {initialize, updateBoard, getBoard};
+}
 
 // - game instance
 // - game id - getter
