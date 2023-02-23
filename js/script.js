@@ -1,16 +1,20 @@
 // player instance
 // -  player name - setter/getter
 // -  player symbol - setter/getter
-const player = function () {
+const player = function (...args) {
   let name, symbol;
   const setName = function (nameInp) { name = nameInp; }
   const getName = function () {return name;}
   const setSymbol = function (symbolInp) { symbol = symbolInp; }
   const getSymbol = function () {return symbol;}
+  if (args.length === 2) {
+    setName(args[0]);
+    setSymbol(args[1]);
+  }
   const getMove = function () {
     let row = prompt(`${name}, enter row for your move (0 to 2):`);
     let col = prompt(`${name}, enter col for your move (0 to 2):`);
-    return [row, col];
+    return [Number(row), Number(col)];
   }
   return {setName, getName, setSymbol, getSymbol, getMove};
 };
@@ -84,6 +88,28 @@ const gameBoard = function () {
 // - display notif if not
 const game = function () {
   const playRound = function () {
+    let player1 = player("A", "X"), player2 = player("B", "O"), current;
+    let gameBoardObj = gameBoard();
+    gameBoardObj.initialize();
+    let gameOver = false, move = 1;
+    while (!gameOver && move <= 9) {
+      let currentValue = 0;
+      if (move % 2 === 0) {
+        currentValue = 2;
+        current = player2;
+      }
+      else {
+        currentValue = 1;
+        current = player1;
+      }
+      [row, col] = current.getMove();
+      gameBoardObj.updateBoard(row, col, currentValue);
+      console.log(gameBoardObj.getBoard());
+      if (gameBoardObj.hasWon(row, col))
+        gameOver = true;
+      else
+        move += 1;
+    }
   }
   return {playRound};
 }
