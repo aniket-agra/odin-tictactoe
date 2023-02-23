@@ -7,7 +7,12 @@ const player = function () {
   const getName = function () {return name;}
   const setSymbol = function (symbolInp) { symbol = symbolInp; }
   const getSymbol = function () {return symbol;}
-  return {setName, getName, setSymbol, getSymbol};
+  const getMove = function () {
+    let row = prompt(`${name}, enter row for your move (0 to 2):`);
+    let col = prompt(`${name}, enter col for your move (0 to 2):`);
+    return [row, col];
+  }
+  return {setName, getName, setSymbol, getSymbol, getMove};
 };
 
 
@@ -64,7 +69,7 @@ const gameBoard = function () {
     }
     return (chkRow || chkCol || chkDiag);
   }
-  return {initialize, updateBoard, getBoard};
+  return {initialize, updateBoard, getBoard, hasWon};
 }
 
 // - game instance
