@@ -37,13 +37,14 @@ const gameBoard = function () {
   }
   const getBoard = function () {
     // return a copy or display ??
-    let boardCopy = new Array(3);
+    // let boardCopy = new Array(3);
     for (let i = 0; i < 3; i++) {
-      boardCopy[i] = new Array(3);
-      for (let j = 0; j < 3; j++)
-        boardCopy[i][j] = boardArray[i][j];
+      // boardCopy[i] = new Array(3);
+      console.log(`${boardArray[i][0]}, ${boardArray[i][1]}, ${boardArray[i][2]}`);
+      // for (let j = 0; j < 3; j++)
+        // boardCopy[i][j] = boardArray[i][j];
     }
-    return boardCopy;
+    // return boardCopy;
   }
   const hasWon = function (row, col) {
     let chkRow, chkCol, chkDiag = false;
@@ -109,6 +110,10 @@ const game = function () {
         gameOver = true;
       else
         move += 1;
+    }
+    if (gameOver) {
+      alert(`${current.getName()} wins!!`);
+      // do other stuff to reset game!
     }
   }
   return {playRound};
