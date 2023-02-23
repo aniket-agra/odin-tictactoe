@@ -36,6 +36,34 @@ const gameBoard = function () {
     }
     return boardCopy;
   }
+  const hasWon = function (row, col) {
+    let chkRow, chkCol, chkDiag = false;
+    // check row and column for all divs
+    chkRow = (boardArray[row][0] === boardArray[row][1]) && (boardArray[row][1] === boardArray[row][2]);
+    chkCol = (boardArray[0][col] === boardArray[1][col]) && (boardArray[1][col] === boardArray[2][col]);
+    // also check diagonals for divs that allow it - defined by the following condition
+    if (Math.abs(row - col) % 2 === 0) {
+      let row1, col1, row2, col2, chkMainDiag = false, chkAntiDiag = false;
+      row1 = (row + 1) % 3; col1 = (col + 1) % 3; row2 = (row + 2) % 3; col2 = (col + 2) % 3;
+      // check divs along main diagonal
+      chkMainDiag = (boardArray[row][col] === boardArray[row1][col1]) && 
+      (boardArray[row][col] === boardArray[row2][col2]);
+      // for anti diagonal interchange combination of row and col
+      let temp = row1; row1 = row2; row2 = temp;
+      chkAntiDiag = (boardArray[row][col] === boardArray[row1][col1]) && 
+      (boardArray[row][col] === boardArray[row2][col2]); 
+      // check main diagonal for divs along the main diagonal
+      if (row === col)
+        chkDiag = chkMainDiag;
+      // check along anti diagonal too if we're in the middle
+      if (row === 1 && col === 1)
+        chkDiag = chkMainDiag || chkAntiDiag;
+      // check anti diagonal for divs along the anti diagonal
+      if (Math.abs(row - col) === 2)
+        chkDiag = chkAntiDiag;      
+    }
+    return (chkRow || chkCol || chkDiag);
+  }
   return {initialize, updateBoard, getBoard};
 }
 
@@ -50,32 +78,6 @@ const gameBoard = function () {
 // - determine if next move needs to be played () 
 // - display notif if not
 const game = function () {
-  const hasWon = function (row, col) {
-    let chkRow, chkCol, chkDiag = false;
-    // check row and column for all divs
-    chkRow = (boardArr[row][0] === boardArr[row][1]) && (boardArr[row][1] === boardArr[row][2]);
-    chkCol = (boardArr[0][col] === boardArr[1][col]) && (boardArr[1][col] === boardArr[2][col]);
-    // also check diagonals for divs that allow it - defined by the following condition
-    if (Math.abs(row - col) % 2 === 0) {
-      let row1, col1, row2, col2, chkMainDiag = false, chkAntiDiag = false;
-      row1 = (row + 1) % 3; col1 = (col + 1) % 3; row2 = (row + 2) % 3; col2 = (col + 2) % 3;
-      // check divs along main diagonal
-      chkMainDiag = (boardArr[row][col] === boardArr[row1][col1]) && (boardArr[row][col] === boardArr[row2][col2]);
-      // for anti diagonal interchange combination of row and col
-      let temp = row1; row1 = row2; row2 = temp;
-      chkAntiDiag = (boardArr[row][col] === boardArr[row1][col1]) && (boardArr[row][col] === boardArr[row2][col2]); 
-      // check main diagonal for divs along the main diagonal
-      if (row === col)
-        chkDiag = chkMainDiag;
-      // check along anti diagonal too if we're in the middle
-      if (row === 1 && col === 1)
-        chkDiag = chkMainDiag || chkAntiDiag;
-      // check anti diagonal for divs along the anti diagonal
-      if (Math.abs(row - col) === 2)
-        chkDiag = chkAntiDiag;      
-    }
-    return (chkRow || chkCol || chkDiag);
-  }
   const playRound = function () {
   }
   return {playRound};
