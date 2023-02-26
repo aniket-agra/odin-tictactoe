@@ -88,10 +88,21 @@ const gameBoard = function () {
 // - determine if next move needs to be played () 
 // - display notif if not
 const game = function () {
-  const playRound = function () {
-    let player1 = player("A", "X"), player2 = player("B", "O"), current;
-    let gameBoardObj = gameBoard();
+  let player1, player2, current, gameBoardObj = gameBoard();
+  const getPlayerInfo = function (playerNum) {
+    // get player info - name and symbol
+    // returns player object
+    return player(`Player ${playerNum}`, `${playerNum === 1 ? "X" : "O"}`);
+  }
+  const initialize = function () {
+    // initialize board, other vars
+    console.log("Getting player 1 info...");
+    player1 = getPlayerInfo(1);
+    console.log("Getting player 2 info...");
+    player2 = getPlayerInfo(2);
     gameBoardObj.initialize();
+  }
+  const playRound = function () {
     let gameOver = false, move = 1;
     while (!gameOver && move <= 9) {
       let currentValue = 0;
@@ -116,7 +127,7 @@ const game = function () {
       // do other stuff to reset game!
     }
   }
-  return {playRound};
+  return {initialize, playRound};
 }
 
 // create divs for board game, add listeners to each div
