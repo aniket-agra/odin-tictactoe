@@ -1,6 +1,3 @@
-// player instance
-// -  player name - setter/getter
-// -  player symbol - setter/getter
 const player = function (...args) {
   let name, symbol;
   const setName = function (nameInp) { name = nameInp; }
@@ -25,9 +22,6 @@ const player = function (...args) {
   return {setName, getName, setSymbol, getSymbol, playMove};
 };
 
-
-// - gameBoard instance
-// - game board array - setter/getter
 const gameBoard = function () {
   let boardArray;
   const initialize = function () {
@@ -83,16 +77,6 @@ const gameBoard = function () {
   return {initialize, updateBoard, getBoard, hasWon};
 }
 
-// - game instance
-// - game id - getter
-// - players - getter
-// - game board 
-// - buttons to confirm each player's move - accept last clicked square only
-// - only active for player currently playing
-// - initialize game () - initialize all pvt vars
-// - display board()
-// - determine if next move needs to be played () 
-// - display notif if not
 const game = function () {
   let player1, player2, current, gameBoardObj = gameBoard();
   const getPlayerInfo = function (playerNum) {
@@ -120,14 +104,6 @@ const game = function () {
         currentValue = 1;
         current = player1;
       }
-      //   [row, col] = current.getMove();
-      //   gameBoardObj.updateBoard(row, col, currentValue);
-      //   console.log(gameBoardObj.getBoard());
-      //   if (gameBoardObj.hasWon(row, col))
-      //     gameOver = true;
-      //   else
-      //     move += 1;
-      // }
       gameOver = current.playMove(gameBoardObj);
       if (gameOver) {
         alert(`${current.getName()} wins!!`);
