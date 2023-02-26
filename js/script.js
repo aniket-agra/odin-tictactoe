@@ -16,7 +16,12 @@ const player = function (...args) {
     let col = prompt(`${name}, enter col for your move (0 to 2):`);
     return [Number(row), Number(col)];
   }
-  return {setName, getName, setSymbol, getSymbol, getMove};
+  const playMove = function (boardObj) {
+    [row, col] = getMove();
+    boardObj.updateBoard(row, col, symbol);
+    return boardObj.hasWon(row, col);
+  }
+  return {setName, getName, setSymbol, getSymbol, playMove};
 };
 
 
@@ -114,17 +119,21 @@ const game = function () {
         currentValue = 1;
         current = player1;
       }
-      [row, col] = current.getMove();
-      gameBoardObj.updateBoard(row, col, currentValue);
-      console.log(gameBoardObj.getBoard());
-      if (gameBoardObj.hasWon(row, col))
-        gameOver = true;
+      //   [row, col] = current.getMove();
+      //   gameBoardObj.updateBoard(row, col, currentValue);
+      //   console.log(gameBoardObj.getBoard());
+      //   if (gameBoardObj.hasWon(row, col))
+      //     gameOver = true;
+      //   else
+      //     move += 1;
+      // }
+      gameOver = current.playMove(gameBoardObj);
+      if (gameOver) {
+        alert(`${current.getName()} wins!!`);
+        // do other stuff to reset game!
+      }
       else
         move += 1;
-    }
-    if (gameOver) {
-      alert(`${current.getName()} wins!!`);
-      // do other stuff to reset game!
     }
   }
   return {initialize, playRound};
@@ -140,5 +149,5 @@ const game = function () {
 // check if next move is to be played, if yes disable pl1 button else display notif
 // repeat for pl2 until either someone wins or gameboard is filled up 
 
-const startBtn = document.querySelector(".start");
-startBtn.addEventListener("click", game().initialize);
+// const startBtn = document.querySelector(".start");
+// startBtn.addEventListener("click", game().initialize);
