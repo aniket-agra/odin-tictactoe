@@ -19,6 +19,7 @@ const player = function (...args) {
   const playMove = function (boardObj) {
     [row, col] = getMove();
     boardObj.updateBoard(row, col, symbol);
+    boardObj.getBoard();
     return boardObj.hasWon(row, col);
   }
   return {setName, getName, setSymbol, getSymbol, playMove};
