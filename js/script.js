@@ -126,5 +126,22 @@ const game = function () {
 // check if next move is to be played, if yes disable pl1 button else display notif
 // repeat for pl2 until either someone wins or gameboard is filled up 
 
-// const startBtn = document.querySelector(".start");
-// startBtn.addEventListener("click", game().initialize);
+function boardMove() {
+
+}
+
+const startBtn = document.querySelector(".start");
+startBtn.addEventListener("click", function () {
+  let gameGrid = document.querySelector(".gameGrid");
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      let gridDiv = document.createElement("div");
+      gridDiv.classList.add(`${i}${j}`);
+      gridDiv.addEventListener('click', boardMove);
+      gridDiv.style.height = "3rem";
+      gridDiv.style.width = "3rem";
+      gridDiv.style.border = "2px solid black";
+      gameGrid.appendChild(gridDiv);
+    }
+  }
+});
