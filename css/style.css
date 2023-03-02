@@ -12,3 +12,9 @@
   border: 2px solid black;
 }
 
+.gameGrid > div {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
