@@ -115,6 +115,7 @@ const game = function () {
             current = player2;
           else 
             current = player1;
+          e.target.textContent = current.getSymbol();
           gameOver = current.playMoveDOM(gameBoardObj, clickedRow, clickedCol);
           if (gameOver) {
             alert(`${current.getName()} wins!!`);
