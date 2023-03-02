@@ -19,7 +19,12 @@ const player = function (...args) {
     boardObj.getBoard();
     return boardObj.hasWon(row, col);
   }
-  return {setName, getName, setSymbol, getSymbol, playMove};
+  const playMoveDOM = function (boardObj, row, col) {
+    boardObj.updateBoard(row, col, symbol);
+    boardObj.getBoard();
+    return boardObj.hasWon(row, col);
+  }
+  return {setName, getName, setSymbol, getSymbol, playMove, playMoveDOM};
 };
 
 const gameBoard = function () {
@@ -84,6 +89,7 @@ const game = function () {
     // returns player object
     return player(`Player ${playerNum}`, `${playerNum === 1 ? "X" : "O"}`);
   }
+
   const initialize = function () {
     // initialize board, other vars
     console.log("Getting player 1 info...");
@@ -92,6 +98,40 @@ const game = function () {
     player2 = getPlayerInfo(2);
     gameBoardObj.initialize();
   }
+
+  const playRoundDOM = function () {
+    initialize();
+    let gameGrid = document.querySelector(".gameGrid");
+    let gameOver = false, move = 1;
+    let updateMove = function (e) {
+      let clickedRow = Number(e.target.classList[0][0]), clickedCol = Number(e.target.classList[0][1]);
+      if (!gameOver && move <= 9) {
+        if (move % 2 === 0) 
+          current = player2;
+        else 
+          current = player1;
+        gameOver = current.playMoveDOM(gameBoardObj, clickedRow, clickedCol);
+        if (gameOver) {
+          alert(`${current.getName()} wins!!`);
+          // do other stuff to reset game!
+        }
+        else 
+          move += 1;
+      }
+    }
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        let gridDiv = document.createElement("div");
+        gridDiv.classList.add(`${i}${j}`);
+        gridDiv.addEventListener('click', updateMove);
+        gridDiv.style.height = "3rem";
+        gridDiv.style.width = "3rem";
+        gridDiv.style.border = "2px solid black";
+        gameGrid.appendChild(gridDiv);
+      }
+    }      
+  }
+
   const playRound = function () {
     let gameOver = false, move = 1;
     while (!gameOver && move <= 9) {
@@ -113,7 +153,7 @@ const game = function () {
         move += 1;
     }
   }
-  return {initialize, playRound};
+  return {initialize, playRound, playRoundDOM};
 }
 
 // create divs for board game, add listeners to each div
@@ -126,22 +166,5 @@ const game = function () {
 // check if next move is to be played, if yes disable pl1 button else display notif
 // repeat for pl2 until either someone wins or gameboard is filled up 
 
-function boardMove() {
-
-}
-
 const startBtn = document.querySelector(".start");
-startBtn.addEventListener("click", function () {
-  let gameGrid = document.querySelector(".gameGrid");
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 3; j++) {
-      let gridDiv = document.createElement("div");
-      gridDiv.classList.add(`${i}${j}`);
-      gridDiv.addEventListener('click', boardMove);
-      gridDiv.style.height = "3rem";
-      gridDiv.style.width = "3rem";
-      gridDiv.style.border = "2px solid black";
-      gameGrid.appendChild(gridDiv);
-    }
-  }
-});
+startBtn.addEventListener("click", game().playRoundDOM);
