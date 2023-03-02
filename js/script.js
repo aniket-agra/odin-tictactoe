@@ -105,7 +105,7 @@ const game = function () {
   const playRoundDOM = function () {
     initialize();
     let gameGrid = document.querySelector(".gameGrid");
-    let gameOver = false, move = 1;
+    let gameOver = false, move = 0;
     let updateMove = function (e) {
       let clickedRow = Number(e.target.classList[0][0]), clickedCol = Number(e.target.classList[0][1]);
       let alreadyFilled = gameBoardObj.queryValue(clickedRow, clickedCol) !== 0;
