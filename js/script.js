@@ -167,15 +167,5 @@ const game = function () {
   return {initialize, playRound, playRoundDOM};
 }
 
-// create divs for board game, add listeners to each div
-// create instance of game 
-// for each click call updateBoard with the move - use returned result to either prompt for re-move 
-// or call playNext - if yes, getArray() and display new board. If no, declare winner
-
-// typical flow - click start button, present form for pl1/pl2, pl1 gets first chance to play (by disabling pl2 button)
-// clicks on a box, check if move is legal - if not prompt for re-play, if yes record in game board 
-// check if next move is to be played, if yes disable pl1 button else display notif
-// repeat for pl2 until either someone wins or gameboard is filled up 
-
 const startBtn = document.querySelector(".start");
 startBtn.addEventListener("click", game().playRoundDOM);
