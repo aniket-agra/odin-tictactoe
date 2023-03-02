@@ -111,7 +111,7 @@ const game = function () {
       let alreadyFilled = gameBoardObj.queryValue(clickedRow, clickedCol) !== 0;
       if (!alreadyFilled) {
         if (!gameOver && move <= 9) {
-          if (move % 2 === 0) 
+          if (move % 2 !== 0) 
             current = player2;
           else 
             current = player1;
