@@ -79,7 +79,10 @@ const gameBoard = function () {
     }
     return (chkRow || chkCol || chkDiag);
   }
-  return {initialize, updateBoard, getBoard, hasWon};
+  const queryValue = function (row, col) {
+    return boardArray[row][col];
+  }
+  return {initialize, updateBoard, getBoard, hasWon, queryValue};
 }
 
 const game = function () {
@@ -105,21 +108,26 @@ const game = function () {
     let gameOver = false, move = 1;
     let updateMove = function (e) {
       let clickedRow = Number(e.target.classList[0][0]), clickedCol = Number(e.target.classList[0][1]);
-      if (!gameOver && move <= 9) {
-        if (move % 2 === 0) 
-          current = player2;
-        else 
-          current = player1;
-        gameOver = current.playMoveDOM(gameBoardObj, clickedRow, clickedCol);
-        if (gameOver) {
-          alert(`${current.getName()} wins!!`);
-          // do other stuff to reset game!
+      let alreadyFilled = gameBoardObj.queryValue(clickedRow, clickedCol) !== 0;
+      if (!alreadyFilled) {
+        if (!gameOver && move <= 9) {
+          if (move % 2 === 0) 
+            current = player2;
+          else 
+            current = player1;
+          gameOver = current.playMoveDOM(gameBoardObj, clickedRow, clickedCol);
+          if (gameOver) {
+            alert(`${current.getName()} wins!!`);
+            // do other stuff to reset game!
+          }
+          else 
+            move += 1;
         }
-        else 
-          move += 1;
+        else if (!gameOver)
+          alert("Game tied!");
       }
-      else if (!gameOver)
-        alert("Game tied!");
+      else 
+        alert("Sorry, this cell is already filled!");
     }
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
