@@ -123,7 +123,7 @@ const game = function () {
           else 
             move += 1;
         }
-        else if (!gameOver)
+        if (!gameOver && move == 9)
           alert("Game tied!");
       }
       else 
