@@ -86,11 +86,38 @@ const gameBoard = function () {
 }
 
 const game = function () {
-  let player1, player2, current, gameBoardObj = gameBoard();
+  let player1, player2, current, gameBoardObj, gameOver, move;
   const getPlayerInfo = function (playerNum) {
     // get player info - name and symbol
     // returns player object
     return player(`Player ${playerNum}`, `${playerNum === 1 ? "X" : "O"}`);
+  }
+
+  const updateMove = function (e) {
+    let clickedRow = Number(e.target.classList[0][0]), clickedCol = Number(e.target.classList[0][1]);
+    let alreadyFilled = gameBoardObj.queryValue(clickedRow, clickedCol) !== 0;
+    if (!alreadyFilled) {
+      if (!gameOver && move <= 9) {
+        if (move % 2 !== 0) 
+          current = player2;
+        else 
+          current = player1;
+        e.target.textContent = current.getSymbol();
+        gameOver = current.playMoveDOM(gameBoardObj, clickedRow, clickedCol);
+        if (gameOver) {
+          alert(`${current.getName()} wins!!`);
+          initialize();
+        }
+        else 
+          move += 1;
+      }
+      if (!gameOver && move == 9) {
+        alert("Game tied!");
+        initialize();
+      }
+    }
+    else 
+      alert("Sorry, this cell is already filled!");
   }
 
   const initialize = function () {
@@ -99,37 +126,12 @@ const game = function () {
     player1 = getPlayerInfo(1);
     console.log("Getting player 2 info...");
     player2 = getPlayerInfo(2);
+    gameBoardObj = gameBoard();
     gameBoardObj.initialize();
-  }
-
-  const playRoundDOM = function () {
-    initialize();
+    gameOver = false;
+    move = 0;
     let gameGrid = document.querySelector(".gameGrid");
-    let gameOver = false, move = 0;
-    let updateMove = function (e) {
-      let clickedRow = Number(e.target.classList[0][0]), clickedCol = Number(e.target.classList[0][1]);
-      let alreadyFilled = gameBoardObj.queryValue(clickedRow, clickedCol) !== 0;
-      if (!alreadyFilled) {
-        if (!gameOver && move <= 9) {
-          if (move % 2 !== 0) 
-            current = player2;
-          else 
-            current = player1;
-          e.target.textContent = current.getSymbol();
-          gameOver = current.playMoveDOM(gameBoardObj, clickedRow, clickedCol);
-          if (gameOver) {
-            alert(`${current.getName()} wins!!`);
-            // do other stuff to reset game!
-          }
-          else 
-            move += 1;
-        }
-        if (!gameOver && move == 9)
-          alert("Game tied!");
-      }
-      else 
-        alert("Sorry, this cell is already filled!");
-    }
+    document.querySelectorAll(".gameGrid > *").forEach(e => gameGrid.removeChild(e));
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         let gridDiv = document.createElement("div");
@@ -140,7 +142,7 @@ const game = function () {
         gridDiv.style.border = "2px solid black";
         gameGrid.appendChild(gridDiv);
       }
-    }      
+    }
   }
 
   const playRound = function () {
@@ -164,8 +166,8 @@ const game = function () {
         move += 1;
     }
   }
-  return {initialize, playRound, playRoundDOM};
+  return {initialize, playRound};
 }
 
 const startBtn = document.querySelector(".start");
-startBtn.addEventListener("click", game().playRoundDOM);
+startBtn.addEventListener("click", game().initialize);
