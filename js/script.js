@@ -106,6 +106,8 @@ const game = function () {
         gameOver = current.playMoveDOM(gameBoardObj, clickedRow, clickedCol);
         if (gameOver) {
           alert(`${current.getName()} wins!!`);
+          let scoreDiv = move % 2 !== 0 ? document.querySelector(".player2 > .score") : document.querySelector(".player1 > .score");
+          scoreDiv.textContent = Number(scoreDiv.textContent) + 1;
           initialize();
         }
         else 
