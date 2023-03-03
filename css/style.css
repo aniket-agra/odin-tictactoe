@@ -26,3 +26,11 @@
   display: grid;
   justify-items: center;
 }
+
+.player1 > .pl1title, .player2 > .pl2title {
+  align-self: last baseline;
+}
+
+.player1 > .score, .player2 > .score {
+  align-self: first baseline;
+}
