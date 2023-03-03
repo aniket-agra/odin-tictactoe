@@ -18,3 +18,7 @@
   align-items: center;
 }
 
+.player1, .player2 {
+  display: grid;
+  justify-items: center;
+}
