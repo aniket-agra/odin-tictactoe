@@ -2,6 +2,11 @@
   scale: 0;
 }
 
+.startDiv {
+  display: flex;
+  justify-content: center;
+}
+
 .gamePage {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
