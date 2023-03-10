@@ -7,6 +7,32 @@
   justify-content: center;
 }
 
+.details {
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  border: 2px solid black;
+  width: max-content;
+  padding: 0.5rem 1rem;
+}
+
+label {
+  justify-self: self-end;
+}
+
+input {
+  grid-column : 2 / -1;
+}
+
+form > button {
+  grid-column: 2 / 3;
+}
+
 .gamePage {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
