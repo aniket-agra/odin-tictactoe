@@ -21,8 +21,14 @@ form {
   padding: 0.5rem 1rem;
 }
 
+form > .title {
+  grid-column: 2 / 3;
+  justify-self: center;
+}
+
 label {
   justify-self: self-end;
+  grid-column: 1 / 2;
 }
 
 input {
