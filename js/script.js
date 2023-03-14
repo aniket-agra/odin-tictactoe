@@ -174,6 +174,5 @@ const game = function () {
 const startBtn = document.querySelector(".start");
 startBtn.addEventListener("click", e => {
   document.querySelector(".start").classList.toggle("hidden");
-  document.querySelector(".gamePage").classList.toggle("hidden");
   game().initialize(e);
 });
