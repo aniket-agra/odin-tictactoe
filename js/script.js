@@ -88,8 +88,8 @@ const gameBoard = function () {
 const game = function () {
   let player1, player2, current, gameBoardObj, gameOver, move;
   const getPlayerInfo = function (playerNum) {
-    // get player info - name and symbol
-    // returns player object
+    //should only hide/unhide forms that have already been fully configured
+    //clicking submit should create and assign player objects
     return player(`Player ${playerNum}`, `${playerNum === 1 ? "X" : "O"}`);
   }
 
