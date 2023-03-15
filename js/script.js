@@ -139,7 +139,15 @@ const game = function () {
   }
 
   const hookForm = function () {
-
+    document.querySelectorAll("form input").forEach(x => x.addEventListener("change", function (e) {
+      e.target.setAttribute("value", e.target.value);
+    }));
+    document.querySelector(".pl1details button").addEventListener("click", e => {
+      e.preventDefault();
+    });
+    document.querySelector(".pl2details button").addEventListener("click", e => {
+      e.preventDefault();
+    });
   }
 
   const initialize = function () {
@@ -177,7 +185,7 @@ const game = function () {
         move += 1;
     }
   }
-  return {initialize, playRound};
+  return {initialize, playRound, hookForm};
 }
 
 const startBtn = document.querySelector(".start");
