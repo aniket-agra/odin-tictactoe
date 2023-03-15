@@ -7,7 +7,7 @@
   justify-content: center;
 }
 
-.details {
+.pl1details, .pl2details {
   display: flex;
   justify-content: center;
 }
