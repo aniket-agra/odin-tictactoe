@@ -38,6 +38,7 @@ input {
 form > button {
   justify-self: end;
   grid-column: 2 / 3;
+  padding: 0.2rem 0.4rem;
 }
 
 .gamePage {
