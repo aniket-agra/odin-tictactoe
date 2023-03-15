@@ -122,16 +122,7 @@ const game = function () {
       alert("Sorry, this cell is already filled!");
   }
 
-  const initialize = function () {
-    // initialize board, other vars
-    console.log("Getting player 1 info...");
-    player1 = getPlayerInfo(1);
-    console.log("Getting player 2 info...");
-    player2 = getPlayerInfo(2);
-    gameBoardObj = gameBoard();
-    gameBoardObj.initialize();
-    gameOver = false;
-    move = 0;
+  const hookGrid = function () {
     let gameGrid = document.querySelector(".gameGrid");
     document.querySelectorAll(".gameGrid > *").forEach(e => gameGrid.removeChild(e));
     for (let i = 0; i < 3; i++) {
@@ -145,6 +136,24 @@ const game = function () {
         gameGrid.appendChild(gridDiv);
       }
     }
+  }
+
+  const hookForm = function () {
+
+  }
+
+  const initialize = function () {
+    // initialize board, other vars
+    hookForm();
+    console.log("Getting player 1 info...");
+    player1 = getPlayerInfo(1);
+    console.log("Getting player 2 info...");
+    player2 = getPlayerInfo(2);
+    gameBoardObj = gameBoard();
+    gameBoardObj.initialize();
+    gameOver = false;
+    move = 0;
+    hookGrid();  
   }
 
   const playRound = function () {
