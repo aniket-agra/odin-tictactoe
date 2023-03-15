@@ -144,19 +144,22 @@ const game = function () {
     }));
     document.querySelector(".pl1details button").addEventListener("click", e => {
       e.preventDefault();
+      player1 = player(document.querySelector(".pl1details #name").getAttribute("value"), document.querySelector(".pl1details #symbol").getAttribute("value"));
+      document.querySelector(".pl1title").textContent = player1.getName();
+      document.querySelector(".pl1details").classList.toggle("hidden");
     });
     document.querySelector(".pl2details button").addEventListener("click", e => {
       e.preventDefault();
+      player2 = player(document.querySelector(".pl2details #name").getAttribute("value"), document.querySelector(".pl2details #symbol").getAttribute("value"));
+      document.querySelector(".pl2title").textContent = player2.getName();
+      document.querySelector(".pl2details").classList.toggle("hidden");
+      document.querySelector(".gamePage").classList.toggle("hidden");
     });
   }
 
   const initialize = function () {
     // initialize board, other vars
     hookForm();
-    console.log("Getting player 1 info...");
-    player1 = getPlayerInfo(1);
-    console.log("Getting player 2 info...");
-    player2 = getPlayerInfo(2);
     gameBoardObj = gameBoard();
     gameBoardObj.initialize();
     gameOver = false;
