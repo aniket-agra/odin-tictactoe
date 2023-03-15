@@ -14,16 +14,16 @@
 
 form {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 5fr 8fr 8fr;
   gap: 1rem;
   border: 2px solid black;
-  width: max-content;
+  width: 20rem;
   padding: 0.5rem 1rem;
 }
 
 form > .title {
-  grid-column: 2 / 3;
-  justify-self: center;
+  grid-column: 2 / -1;
+  justify-self: start;
 }
 
 label {
@@ -36,6 +36,7 @@ input {
 }
 
 form > button {
+  justify-self: center;
   grid-column: 2 / 3;
 }
 
