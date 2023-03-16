@@ -147,6 +147,7 @@ const game = function () {
       player1 = player(document.querySelector(".pl1details #name").getAttribute("value"), document.querySelector(".pl1details #symbol").getAttribute("value"));
       document.querySelector(".pl1title").textContent = player1.getName();
       document.querySelector(".pl1details").classList.toggle("hidden");
+      document.querySelector(".pl2details").classList.toggle("hidden");
     });
     document.querySelector(".pl2details button").addEventListener("click", e => {
       e.preventDefault();
@@ -160,6 +161,7 @@ const game = function () {
   const initialize = function () {
     // initialize board, other vars
     hookForm();
+    document.querySelector(".pl1details").classList.toggle("hidden");
     gameBoardObj = gameBoard();
     gameBoardObj.initialize();
     gameOver = false;
@@ -188,7 +190,7 @@ const game = function () {
         move += 1;
     }
   }
-  return {initialize, playRound, hookForm};
+  return {initialize};
 }
 
 const startBtn = document.querySelector(".start");
