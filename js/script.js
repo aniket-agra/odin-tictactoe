@@ -108,14 +108,14 @@ const game = function () {
           alert(`${current.getName()} wins!!`);
           let scoreDiv = move % 2 !== 0 ? document.querySelector(".player2 > .score") : document.querySelector(".player1 > .score");
           scoreDiv.textContent = Number(scoreDiv.textContent) + 1;
-          initialize();
+          initialize(false);
         }
         else 
           move += 1;
       }
       if (!gameOver && move == 9) {
         alert("Game tied!");
-        initialize();
+        initialize(false);
       }
     }
     else 
@@ -158,10 +158,12 @@ const game = function () {
     });
   }
 
-  const initialize = function () {
+  const initialize = function (reset) {
     // initialize board, other vars
-    hookForm();
-    document.querySelector(".pl1details").classList.toggle("hidden");
+    if (reset) {
+      hookForm();
+      document.querySelector(".pl1details").classList.toggle("hidden");
+    }
     gameBoardObj = gameBoard();
     gameBoardObj.initialize();
     gameOver = false;
@@ -196,5 +198,5 @@ const game = function () {
 const startBtn = document.querySelector(".start");
 startBtn.addEventListener("click", e => {
   document.querySelector(".start").classList.toggle("hidden");
-  game().initialize(e);
+  game().initialize(true);
 });
