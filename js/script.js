@@ -201,3 +201,10 @@ startBtn.addEventListener("click", e => {
   gameInst.hookGrid();
   gameInst.initialize(true);
 });
+
+document.querySelector(".reset").addEventListener("click", function (e) {
+  document.querySelectorAll(".score").forEach(e => e.textContent = "0");
+  document.querySelector(".gamePage").classList.toggle("hidden");
+  let gameInst = game();
+  gameInst.initialize(true);
+});
