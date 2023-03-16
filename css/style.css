@@ -48,6 +48,12 @@ form > button {
   justify-items: center;
 }
 
+.reset {
+  grid-column: 2 / 3;
+  justify-self: center;
+  margin-top: 10rem;
+}
+
 .gameGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
