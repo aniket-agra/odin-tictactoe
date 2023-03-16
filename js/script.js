@@ -124,7 +124,6 @@ const game = function () {
 
   const hookGrid = function () {
     let gameGrid = document.querySelector(".gameGrid");
-    document.querySelectorAll(".gameGrid > *").forEach(e => gameGrid.removeChild(e));
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         let gridDiv = document.createElement("div");
@@ -161,14 +160,13 @@ const game = function () {
   const initialize = function (reset) {
     // initialize board, other vars
     if (reset) {
-      hookForm();
       document.querySelector(".pl1details").classList.toggle("hidden");
     }
+    document.querySelectorAll(".gameGrid > *").forEach(e => e.textContent = "");
     gameBoardObj = gameBoard();
     gameBoardObj.initialize();
     gameOver = false;
     move = 0;
-    hookGrid();  
   }
 
   const playRound = function () {
@@ -192,11 +190,14 @@ const game = function () {
         move += 1;
     }
   }
-  return {initialize};
+  return {initialize, hookForm, hookGrid};
 }
 
 const startBtn = document.querySelector(".start");
 startBtn.addEventListener("click", e => {
   document.querySelector(".start").classList.toggle("hidden");
-  game().initialize(true);
+  let gameInst = game();
+  gameInst.hookForm();
+  gameInst.hookGrid();
+  gameInst.initialize(true);
 });
